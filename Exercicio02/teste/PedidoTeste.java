@@ -3,12 +3,24 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.algaworks.ItemPedido;
+import com.algaworks.Pedido;
+import com.algaworks.ResumoPedido;
+import com.algaworks.desconto.CalculadoraDescontoSegundaFaixa;
+import com.algaworks.desconto.CalculadoraFaixaDesconto;
+import com.algaworks.desconto.CalculadoraPrimeiraFaixa;
+import com.algaworks.desconto.SemDesconto;
+
 public class PedidoTeste {
 	private Pedido pedido;
 	
 	@Before
 	public void setup() {	
-		pedido = new Pedido();
+		CalculadoraFaixaDesconto calculadoraFaixaDesconto =
+				new CalculadoraDescontoSegundaFaixa(
+						new CalculadoraPrimeiraFaixa(
+								new SemDesconto(null)));
+		pedido = new Pedido(calculadoraFaixaDesconto);
 	}
 	
 	@Test
