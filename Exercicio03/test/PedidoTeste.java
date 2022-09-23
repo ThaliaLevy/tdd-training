@@ -3,6 +3,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.algaworks.QuantidadeItensInvalidaException;
 import com.algaworks.ResumoPedido;
 
 public class PedidoTeste {
@@ -53,5 +54,10 @@ public class PedidoTeste {
 	public void deveAplicarDescontoNa2aFaixa() throws Exception {
 		pedido.comItem(1000.0, 1);
 		assertResumoPedido(1000.0, 100.0);
+	}
+	
+	@Test(expected = QuantidadeItensInvalidaException.class)
+	public void deveRejeitarPedidosComQuantidadeDeItensNegativa() throws Exception {
+		pedido.comItem(0.0, -10);
 	}
 }

@@ -1,5 +1,6 @@
 import com.algaworks.ItemPedido;
 import com.algaworks.Pedido;
+import com.algaworks.QuantidadeItensInvalidaException;
 import com.algaworks.desconto.CalculadoraDescontoSegundaFaixa;
 import com.algaworks.desconto.CalculadoraFaixaDesconto;
 import com.algaworks.desconto.CalculadoraPrimeiraFaixa;
@@ -17,7 +18,7 @@ public class PedidoBuilder {
 		instancia = new Pedido(calculadoraFaixaDesconto);
 	}
 	
-	public PedidoBuilder comItem(double valorUnitario, int quantidade) {
+	public PedidoBuilder comItem(double valorUnitario, int quantidade) throws QuantidadeItensInvalidaException {
 		instancia.adicionarItem(new ItemPedido("Gerado", valorUnitario, quantidade));
 		return this;
 	}
